@@ -114,6 +114,10 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
 .user__info > small {
   color: #666;
 }
+.fcc-btn {
+  
+  color: rgb(63, 88, 230);
+}
     </style>
 </head>
 <body>
@@ -126,13 +130,13 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
           <div class="card__body">
             <span class="tag tag-blue">{{tag}}</span>
             <h4>{{p.title}}</h4>
-            <p>{{p.body}}</p>
+            <p>{{p.body}}<a target="_blank" class="fcc-btn" href="http://127.0.0.1:8000/posts/{{p.id}}">Read more...</a></p>
           </div>
           <div class="card__footer">
             <div class="user">
-              <img src={{p.user_img}} alt="user__image" class="user__image">
+              <img src={{p.user_name.user_img}} alt="user__image" class="user__image">
               <div class="user__info">
-                <h5>{{p.user_name}}</h5>
+                <h5>{{p.user_name.user_name}}</h5>
                 <small>{{p.date}}</small>
               </div>
             </div>
