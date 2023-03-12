@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 *,
 *::before,
@@ -118,31 +111,3 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   
   color: rgb(63, 88, 230);
 }
-    </style>
-</head>
-<body>
-  {% for p in post %}
-    <div class="container">
-        <div class="card">
-          <div class="card__header">
-            <img src={{p.post_img}} alt="card__image" class="card__image" width="600">
-          </div>
-          <div class="card__body">
-            <span class="tag tag-blue">{{tag}}</span>
-            <h4>{{p.title}}</h4>
-            <p>{{p.body}}<a target="_blank" class="fcc-btn" href="{{p.get_absolute_url}}">Read more...</a></p>
-          </div>
-          <div class="card__footer">
-            <div class="user">
-              <img src={{p.user_name.user_img}} alt="user__image" class="user__image">
-              <div class="user__info">
-                <h5>{{p.user_name.user_name}}</h5>
-                <small>{{p.date}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  {% endfor %}
-</body>
-</html>

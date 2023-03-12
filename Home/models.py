@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -18,6 +19,9 @@ class Post(models.Model):
     body = models.TextField()
     user_name = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={"pk":self.pk})
 
 class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)

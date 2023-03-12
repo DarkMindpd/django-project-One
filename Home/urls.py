@@ -4,6 +4,6 @@ from .models import Post
 
 urlpatterns = [
     path('', views.Home, name='Home'),
-    path('posts/<int:id>', views.post_details, name='post')
+    path('posts/<int:pk>', views.post_details, name='post')
 ]
 
