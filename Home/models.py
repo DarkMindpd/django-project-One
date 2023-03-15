@@ -4,7 +4,7 @@ from django.urls import reverse
 # Create your models here.
 
 class User(models.Model):
-    user_img = models.URLField(default='https://s26.picofile.com/file/8460931518/user_3_.png')
+    user_img = models.ImageField(upload_to='profile_img', default='profile_img/user_default.png')
     user_name = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -13,7 +13,7 @@ class User(models.Model):
     date_of_singup = models.DateTimeField(auto_now_add=True)
 
 class Post(models.Model):
-    post_img = models.URLField()
+    post_img = models.ImageField(upload_to='post_img', default='post_img/post_default.png')
     tag =  models.CharField(max_length=15)
     title = models.CharField(max_length=255)
     body = models.TextField()
