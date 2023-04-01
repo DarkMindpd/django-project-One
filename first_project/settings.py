@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'login',
     'pro_file',
     'Home',
+    'new_post',
 ]
 
 MIDDLEWARE = [

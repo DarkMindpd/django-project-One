@@ -14,8 +14,8 @@ class User(models.Model):
 
 class Post(models.Model):
     post_img = models.ImageField(upload_to='post_img', default='post_img/post_default.png')
-    tag =  models.CharField(max_length=15)
-    title = models.CharField(max_length=255)
+    tag =  models.CharField(max_length=15, default='')
+    title = models.CharField(max_length=255, default='')
     body = models.TextField()
     user_name = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
