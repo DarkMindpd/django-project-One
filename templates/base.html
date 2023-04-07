@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'nav/nav_bar.css' %}">
+        <link rel="stylesheet" href="{% block style %} {%endblock style %}">
+
+    </head>
+    <body>
+        <nav class="navbar">
+            <!-- NAVIGATION MENU -->
+            <ul class="nav-links">
+                <!-- NAVIGATION MENUS -->
+                <div class="menu">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/">About</a>
+                    </li>
+                    <li class="services">
+                        <a href="/">Services</a>
+                        <!-- DROPDOWN MENU -->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="/">Dropdown 1</a>
+                            </li>
+                            <li>
+                                <a href="/">Dropdown 2</a>
+                            </li>
+                            <li>
+                                <a href="/">Dropdown 2</a>
+                            </li>
+                            <li>
+                                <a href="/">Dropdown 3</a>
+                            </li>
+                            <li>
+                                <a href="/">Dropdown 4</a>
+                            </li>
+                        </ul>
+                    </li>
+                        {% if request.user.username %}
+                        <li>
+                            <a href="{% url 'add_post' %}">New Post</a>
+                        </li>
+                        <li class="services">
+                            <a href="/">{{request.user.username}}</a>
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="/">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="/">Security</a>
+                                </li>
+                                <li>
+                                    <a href="/">LogOUT</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'enter_acc' %}">New Post</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'enter_acc' %}">LogIN/SingUP</a>
+                        </li>
+                        {% endif %}
+                </div>
+            </ul>
+        </nav>
+        {% block body %}
+
+        {%endblock body %}
+    </body>
+</html>
