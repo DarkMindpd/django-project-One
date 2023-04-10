@@ -13,6 +13,18 @@
               rel='stylesheet'>
         <!-- CSS -->
         <link rel="stylesheet" href="{% static 'enter_acc/css/styles.css' %}">
+        <style>
+            .error_message{
+                font-size: 13px;
+                font-weight: 900;
+                color: #c71b1b;
+                background-color: rgba(194, 38, 38, 0.162);
+                outline: none;
+                padding: 0 15px;
+                border: 1px solid#CACACA;
+                border-radius: 6px;
+                    }
+        </style>
     </head>
     <body>
         <section class="container forms">
@@ -23,6 +35,14 @@
                     </header>
                     <form action="{% url 'enter_acc' %}" method="post">
                         {% csrf_token %}
+                        {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+
+                        <p class="error_message">{{ message }}</p>
+
+                        {% endfor %}
+                        {% endif %}
                         <div class="field input-field">
                             <input type="text" placeholder="Username" class="input" name="login_username">
                         </div>
@@ -63,6 +83,13 @@
                     </header>
                     <form action="{% url 'enter_acc' %}" method="post">
                         {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+
+                        <p class="error_message">{{ message }}</p>
+
+                        {% endfor %}
+                        {% endif %}
                         <div class="field input-field">
                             <input type="text" placeholder="Username" class="input" name="username">
                         </div>
