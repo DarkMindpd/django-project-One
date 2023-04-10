@@ -8,6 +8,16 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+    column-gap: 30px;
+}
+
 .form{
     position: absolute;
     max-width: 430px;
@@ -23,8 +33,7 @@
 .forms.show-signup .form.signup{
     opacity: 1;
     pointer-events: auto;
-    background: #7f7fd5;
-    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+    background: #FFF;
 }
 .forms.show-signup .form.login{
     opacity: 0;
