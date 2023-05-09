@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from accounts.models import User
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from Home.views import Home
 
 @login_required(login_url='enter_acc')
 def add_post(request):
@@ -28,4 +31,14 @@ def add_post(request):
                 )'''
         p = Post.objects.all()
         return render(request, 'Home\home.html', {"post" : p})
+    
+@login_required(login_url='enter_acc')
+def PostLike(request, pk):
+    post = Post.objects.get(id = pk)
+    user = request.user
+    if post.like.filter(id = user.id).exists():
+        post.like.remove(user)
+    else:
+        post.like.add(user)
+    return HttpResponseRedirect(reverse(Home))
 

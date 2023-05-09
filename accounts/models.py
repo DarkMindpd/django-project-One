@@ -13,7 +13,7 @@ class User_profile(models.Model):
     user_designation = models.CharField(max_length=100, default="", blank=True, null=True)
     user_location = models.CharField(max_length=100, default="", blank=True, null=True)
     bio = models.CharField(max_length=100, default="", blank=True, null=True)
-    born = models.DateTimeField(blank=True, null=True)
+    born = models.DateField(blank=True, null=True)
     following = models.ManyToManyField("self", blank=True, related_name="followers", symmetrical=False)
 
     def __str__(self) -> str:

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'Home',
     'post',
-    'taggit',
+    'Profile',
 ]
 
 MIDDLEWARE = [
