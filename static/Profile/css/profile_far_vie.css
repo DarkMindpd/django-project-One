@@ -1,0 +1,41 @@
+@font-face {
+    src: unset;
+    font-family: Arial !important;
+    font-display: swap !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-image: url(https://s29.picofile.com/d/8462465084/64fabf42-10f2-40ac-9eb7-3cdbdb326d2c/photo_1530305408560_82d13781b33a.avif);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+body {
+    background: #7f7fd5;
+    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+    min-height: 100vh;
+    overflow-x: hidden;
+}

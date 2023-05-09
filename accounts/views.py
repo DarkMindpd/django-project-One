@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.shortcuts import get_object_or_404 
+from .models import User_profile
+from django.urls import reverse
 
 def enter_acc(request):
     if request.method == 'POST':
@@ -14,7 +17,7 @@ def enter_acc(request):
             password1= request.POST.get('user_pass1')
             password2= request.POST.get('user_pass2')
             if password1 == password2 :
-                if User.objects.get(username=user_name) is None and User.objects.get(email=mail)is None:
+                if len(User.objects.filter(username=user_name)) == 0 and len(User.objects.filter(email=mail)) == 0:
                     u = User.objects.create(username=user_name, email=mail)
                     u.set_password(password1)
                     u.first_name = first_name
@@ -45,3 +48,24 @@ def enter_acc(request):
 def log_out(request):
     logout(request)
     return render(request, 'accounts\index_success_logout.html', {})
+
+
+
+def profile_detail(request, username):
+    user = get_object_or_404(User_profile, user__username = username)
+    return render(request, 'accounts/profile_far_view.html', {'profile' : user})
+
+def followToggle(request, author):
+    author_user = User.objects.get(username = author)
+    author_obj = User_profile.objects.get(user_id = (author_user.id))
+    viewer_user = User.objects.get(username = request.user.username)
+    viewer_obj = User_profile.objects.get(user_id = (viewer_user.id))
+    following = author_obj.following.all()
+
+    if not author == viewer_obj.user.username:
+        if viewer_obj in following:
+            author_obj.following.remove(viewer_obj.id)
+        else:
+            author_obj.following.add(viewer_obj.id)
+    return HttpResponseRedirect(reverse(profile_detail, args=[author_obj.user.username]))
+
