@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404 
 from .models import User_profile
 from django.urls import reverse
+from post.models import Post
 
 def enter_acc(request):
     if request.method == 'POST':
@@ -53,7 +54,13 @@ def log_out(request):
 
 def profile_detail(request, username):
     user = get_object_or_404(User_profile, user__username = username)
-    return render(request, 'accounts/profile_far_view.html', {'profile' : user})
+    post = User.objects.get(username = username).post_set.filter().order_by('-id')[:4][::-1]
+    return render(request, 'accounts/profile_far_view.html', {'profile' : user , 'post' : post})
+
+def profile_posts(request, username):
+    post = User.objects.get(username = username).post_set.all()
+    return render(request, 'accounts/profile_posts.html', {'post' : post})
+
 
 def followToggle(request, author):
     author_user = User.objects.get(username = author)

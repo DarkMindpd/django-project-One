@@ -4,10 +4,12 @@ from django.contrib.auth.decorators import login_required
 
 def Home(request):
      p = Post.objects.all()
-     return render(request, 'Home\home.html', {"post" : p})
+     post = {}
+     for i in p:
+          a = i.like.filter().order_by('-id')[:2][::-1]
+          post[i] = a
+     print([(post.items)])
+     return render(request, 'Home\home.html', {"post" : post})
 
 
-@login_required(login_url='enter_acc')
-def post_details(request,pk):
-    p = Post.objects.get(id=pk)
-    return render(request,'Home\post&comment.html',{'p':p})
+

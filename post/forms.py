@@ -1,12 +1,14 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
+
 
 
 class PostForm(forms.ModelForm):
-    post_img = forms.FileField()
-    post_img = forms.ImageField()
-    title = forms.CharField(max_length=255)
-    body = forms.CharField()
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['post_img','tags','title','body']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

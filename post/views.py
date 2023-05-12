@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from accounts.models import User
 from .models import Post
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from Home.views import Home
@@ -16,22 +16,32 @@ def add_post(request):
     elif request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            print(form)
-            form.save()
-            '''new_post_img = request.POST['post_img']
-            new_post_title = request.POST['title']
-            new_post_body = request.POST['body']
-            new_post_tag = request.POST['tags']
-            Post.objects.create(
-                post_img = new_post_img,
-                tag = new_post_tag,
-                title = new_post_title,
-                body = new_post_body,
-                user = request.user
-                )'''
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
         p = Post.objects.all()
-        return render(request, 'Home\home.html', {"post" : p})
+        return HttpResponseRedirect(reverse(Home))
     
+
+
+
+@login_required(login_url='enter_acc')
+def post_details(request,pk):
+
+    p = Post.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit = False)
+            comment.post = p
+            comment.user = request.user
+            comment.save()
+    return render(request,'post\post&comment.html',{'p':p})
+
+
+
+
 @login_required(login_url='enter_acc')
 def PostLike(request, pk):
     post = Post.objects.get(id = pk)
@@ -40,5 +50,4 @@ def PostLike(request, pk):
         post.like.remove(user)
     else:
         post.like.add(user)
-    return HttpResponseRedirect(reverse(Home))
-
+    return HttpResponseRedirect(reverse(post_details, args=[pk]))
