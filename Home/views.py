@@ -10,7 +10,6 @@ def Home(request):
      for i in p:
           a = i.like.filter().order_by('-id')[:2][::-1]
           pl[i] = a
-     print(pl.get)
      return render(request, 'Home\home.html', {"post" : pl})
 
 @register.filter
