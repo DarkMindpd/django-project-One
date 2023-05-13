@@ -18,6 +18,7 @@ def add_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
+            print(post.post_img)
             post.save()
         p = Post.objects.all()
         return HttpResponseRedirect(reverse(Home))

@@ -24,7 +24,7 @@
 					<div class="d-flex justify-content-between">
 						<div class="d-flex mb-3">
 							<div class="mr-2">
-								<a href="#!" class="text-dark"><img src="{{ p.user.user_profile.user_img.url }}"
+								<a href="{% url 'profile_detail' username=p.user.username %}" class="text-dark"><img src="{{ p.user.user_profile.user_img.url }}"
 										alt="User" class="author-img"></a>
 							</div>
 							<div>
