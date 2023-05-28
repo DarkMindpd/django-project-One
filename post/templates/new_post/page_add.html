@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
-{% static 'add_post/add_post.css' %}
+{% static 'add_post/add_postt.css' %}
 {% endblock style %}
 {% block body %}
 <div class="container">
@@ -10,7 +10,7 @@
       <header>
         Create Post
       </header>
-      <form action="{% url 'add_post' %}" method="post">
+      <form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data" runat="server">
         {% csrf_token %}
         <div class="content">
           <img src="{{ u.user_profile.user_img.url }}" alt="logo">
@@ -23,11 +23,10 @@
             </div>
           </div>
         </div>
+        <img class="post_img" id="blah" src="{% static 'html_img/237522-20.png' %}" alt="your image" />
         <textarea class="title" placeholder="any title?" spellcheck="false" name="title" required></textarea>
-        <textarea placeholder="What's on your mind, {{u.username}}?" spellcheck="false" name="body"
-          required></textarea>
-        <textarea class="tag" placeholder="Tag, if you want." spellcheck="false" name="tags"
-          required></textarea>
+        <textarea placeholder="What's on your mind, {{u.username}}?" spellcheck="false" name="body" required></textarea>
+        <textarea class="tag" placeholder="Tag, if you want." spellcheck="false" name="tags"></textarea>
         <div class="theme-emoji">
           <img src="{% static 'icons/theme.svg' %}" alt="theme">
           <img src="{% static 'icons/smile.svg' %}" alt="smile">
@@ -134,5 +133,11 @@
   arrowBack.addEventListener("click", () => {
     container.classList.remove("active");
   });
+  img.onchange = evt => {
+    const [file] = img.files
+    if (file) {
+      blah.src = URL.createObjectURL(file)
+    }
+  }
 </script>
 {% endblock body %}
